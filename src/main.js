@@ -286,7 +286,7 @@ k.scene("main", async () => {
 // Define the lab scene
 k.scene("lab", async () => {
   console.log("Starting lab scene initialization");
-  
+
   try {
     // Load the lab map data
     const response = await fetch("./map.json");
@@ -295,7 +295,7 @@ k.scene("lab", async () => {
     }
     const mapData = await response.json();
     console.log("Successfully loaded map data");
-    
+
     const layers = mapData.layers;
     console.log("Map layers:", layers);
 
@@ -324,14 +324,12 @@ k.scene("lab", async () => {
       "player",
     ]);
 
-    k.add(player);
-    console.log("Player created in lab scene");
-
     // Process map layers
     for (const layer of layers) {
       console.log("Processing layer:", layer.name);
-      
-      if (layer.name === "boundary") {
+
+      // Add boundaries
+      if (layer.name === "boundaries") {
         for (const boundary of layer.objects) {
           labMap.add([
             k.area({
@@ -339,13 +337,14 @@ k.scene("lab", async () => {
             }),
             k.body({ isStatic: true }),
             k.pos(boundary.x, boundary.y),
-            boundary.name,
+            boundary.name, // Use the name for collision detection if needed
           ]);
         }
         continue;
       }
 
-      if (layer.name === "spawn") {
+      // Set spawn points
+      if (layer.name === "spawnpoint") {
         for (const entity of layer.objects) {
           if (entity.name === "player") {
             console.log("Setting player spawn position:", entity.x, entity.y);
@@ -358,6 +357,9 @@ k.scene("lab", async () => {
         }
       }
     }
+
+    // Add the player to the scene
+    k.add(player);
 
     // Add camera scaling and controls
     setCamScale(k);
@@ -372,7 +374,7 @@ k.scene("lab", async () => {
       k.camPos(player.worldPos().x, player.worldPos().y - 100);
     });
 
-    // Add movement controls
+    // Add movement controls (reuse the same logic as the main scene)
     k.onMouseDown((mouseBtn) => {
       if (mouseBtn !== "left" || player.isInDialogue) return;
 
@@ -437,6 +439,7 @@ k.scene("lab", async () => {
     k.onKeyRelease(() => {
       stopAnims();
     });
+
     k.onKeyDown((key) => {
       const keyMap = [
         k.isKeyDown("right"),
@@ -484,7 +487,6 @@ k.scene("lab", async () => {
         player.move(0, player.speed);
       }
     });
-
   } catch (error) {
     console.error("Error initializing lab scene:", error);
   }
