@@ -23,6 +23,9 @@ k.loadSprite("map2", "./map2.png");
 // Load the lab map sprite
 k.loadSprite("map", "./map.png");
 
+// Load the boss fight map sprite
+k.loadSprite("map3", "./map3.png");
+
 k.setBackground(k.Color.fromHex("#311047"));
 
 k.scene("main", async () => {
@@ -343,6 +346,38 @@ k.scene("lab", async () => {
         continue;
       }
 
+      // Handle exit
+      if (layer.name === "exit") {
+        for (const exit of layer.objects) {
+          labMap.add([
+            k.area({
+              shape: new k.Rect(k.vec2(0), exit.width, exit.height),
+            }),
+            k.body({ isStatic: true }),
+            k.pos(exit.x, exit.y),
+            "exit",
+          ]);
+
+          player.onCollide("exit", () => {
+            console.log("Player collided with exit"); // Debug statement
+            if (player.isInDialogue) {
+              console.log("Player is already in dialogue"); // Debug statement
+              return;
+            }
+            player.isInDialogue = true;
+            displayDialogue(
+              "You are now entering the boss fight...",
+              () => {
+                console.log("Dialogue complete, transitioning to boss fight"); // Debug statement
+                player.isInDialogue = false;
+                k.go("bossFight");
+              }
+            );
+          });
+        }
+        continue;
+      }
+
       // Set spawn points
       if (layer.name === "spawnpoint") {
         for (const entity of layer.objects) {
@@ -489,6 +524,206 @@ k.scene("lab", async () => {
     });
   } catch (error) {
     console.error("Error initializing lab scene:", error);
+  }
+});
+
+// Define the boss fight scene
+k.scene("bossFight", async () => {
+  console.log("Starting boss fight scene initialization");
+
+  try {
+    // Load the boss fight map data
+    const response = await fetch("./map3.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const mapData = await response.json();
+    console.log("Successfully loaded map3 data");
+
+    const layers = mapData.layers;
+    console.log("Map3 layers:", layers);
+
+    // Add the boss fight map
+    const bossMap = k.add([
+      k.sprite("map3"),
+      k.pos(0),
+      k.scale(scaleFactor),
+    ]);
+
+    // Create player in boss fight
+    const player = k.make([
+      k.sprite("spritesheet", { anim: "idle-down" }),
+      k.area({
+        shape: new k.Rect(k.vec2(0, 3), 10, 10),
+      }),
+      k.body(),
+      k.anchor("center"),
+      k.pos(k.width() / 2, k.height() / 2), // Default position (center of screen)
+      k.scale(scaleFactor),
+      {
+        speed: 250,
+        direction: "down",
+        isInDialogue: false,
+      },
+      "player",
+    ]);
+
+    // Process map layers
+    for (const layer of layers) {
+      console.log("Processing layer:", layer.name);
+
+      // Add boundaries
+      if (layer.name === "boundaries") {
+        for (const boundary of layer.objects) {
+          bossMap.add([
+            k.area({
+              shape: new k.Rect(k.vec2(0), boundary.width, boundary.height),
+            }),
+            k.body({ isStatic: true }),
+            k.pos(boundary.x, boundary.y),
+            boundary.name,
+          ]);
+        }
+        continue;
+      }
+
+      // Set spawn points
+      if (layer.name === "spawnpoint") {
+        for (const entity of layer.objects) {
+          if (entity.name === "player") {
+            console.log("Setting player spawn position:", entity.x, entity.y);
+            player.pos = k.vec2(
+              (bossMap.pos.x + entity.x) * scaleFactor,
+              (bossMap.pos.y + entity.y) * scaleFactor
+            );
+            continue;
+          }
+        }
+      }
+    }
+
+    // Add the player to the scene
+    k.add(player);
+
+    // Add camera scaling and controls
+    setCamScale(k);
+    console.log("Boss fight scene initialization complete");
+
+    // Add movement controls (reuse the same logic as the main scene)
+    k.onMouseDown((mouseBtn) => {
+      if (mouseBtn !== "left" || player.isInDialogue) return;
+
+      const worldMousePos = k.toWorld(k.mousePos());
+      player.moveTo(worldMousePos, player.speed);
+
+      const mouseAngle = player.pos.angle(worldMousePos);
+
+      const lowerBound = 50;
+      const upperBound = 125;
+
+      if (
+        mouseAngle > lowerBound &&
+        mouseAngle < upperBound &&
+        player.curAnim() !== "walk-up"
+      ) {
+        player.play("walk-up");
+        player.direction = "up";
+        return;
+      }
+
+      if (
+        mouseAngle < -lowerBound &&
+        mouseAngle > -upperBound &&
+        player.curAnim() !== "walk-down"
+      ) {
+        player.play("walk-down");
+        player.direction = "down";
+        return;
+      }
+
+      if (Math.abs(mouseAngle) > upperBound) {
+        player.flipX = false;
+        if (player.curAnim() !== "walk-side") player.play("walk-side");
+        player.direction = "right";
+        return;
+      }
+
+      if (Math.abs(mouseAngle) < lowerBound) {
+        player.flipX = true;
+        if (player.curAnim() !== "walk-side") player.play("walk-side");
+        player.direction = "left";
+        return;
+      }
+    });
+
+    function stopAnims() {
+      if (player.direction === "down") {
+        player.play("idle-down");
+        return;
+      }
+      if (player.direction === "up") {
+        player.play("idle-up");
+        return;
+      }
+
+      player.play("idle-side");
+    }
+
+    k.onMouseRelease(stopAnims);
+
+    k.onKeyRelease(() => {
+      stopAnims();
+    });
+
+    k.onKeyDown((key) => {
+      const keyMap = [
+        k.isKeyDown("right"),
+        k.isKeyDown("left"),
+        k.isKeyDown("up"),
+        k.isKeyDown("down"),
+      ];
+
+      let nbOfKeyPressed = 0;
+      for (const key of keyMap) {
+        if (key) {
+          nbOfKeyPressed++;
+        }
+      }
+
+      if (nbOfKeyPressed > 1) return;
+
+      if (player.isInDialogue) return;
+      if (keyMap[0]) {
+        player.flipX = false;
+        if (player.curAnim() !== "walk-side") player.play("walk-side");
+        player.direction = "right";
+        player.move(player.speed, 0);
+        return;
+      }
+
+      if (keyMap[1]) {
+        player.flipX = true;
+        if (player.curAnim() !== "walk-side") player.play("walk-side");
+        player.direction = "left";
+        player.move(-player.speed, 0);
+        return;
+      }
+
+      if (keyMap[2]) {
+        if (player.curAnim() !== "walk-up") player.play("walk-up");
+        player.direction = "up";
+        player.move(0, -player.speed);
+        return;
+      }
+
+      if (keyMap[3]) {
+        if (player.curAnim() !== "walk-down") player.play("walk-down");
+        player.direction = "down";
+        player.move(0, player.speed);
+      }
+    });
+  } catch (error) {
+    console.error("Error initializing boss fight scene:", error);
   }
 });
 
