@@ -65,28 +65,6 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":4,
-         "name":"Object Layer 1",
-         "objects":[
-                {
-                 "height":11.9536519282873,
-                 "id":1,
-                 "name":"Map",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":25.8995791779558,
-                 "x":130.49403355047,
-                 "y":155.397475067735
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
-        {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -156,7 +134,7 @@
                 {
                  "height":23.5,
                  "id":5,
-                 "name":"",
+                 "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -167,7 +145,7 @@
                 {
                  "height":42.5,
                  "id":6,
-                 "name":"",
+                 "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -178,7 +156,7 @@
                 {
                  "height":218.5,
                  "id":7,
-                 "name":"",
+                 "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -189,7 +167,7 @@
                 {
                  "height":28.5,
                  "id":8,
-                 "name":"",
+                 "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -200,35 +178,112 @@
                 {
                  "height":165,
                  "id":9,
-                 "name":"",
+                 "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
                  "x":319.5,
                  "y":153
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":8,
-         "name":"book-shelf1",
-         "objects":[
+                }, 
+                {
+                 "height":28.5,
+                 "id":13,
+                 "name":"book-shelf1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":30.5,
+                 "x":17,
+                 "y":153
+                }, 
                 {
                  "height":29.5,
-                 "id":10,
+                 "id":14,
+                 "name":"book-shelf2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":30.5,
+                 "x":50.5,
+                 "y":151.5
+                }, 
+                {
+                 "height":21.5,
+                 "id":16,
+                 "name":"book-shelf3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":22,
+                 "x":85,
+                 "y":157.5
+                }, 
+                {
+                 "height":13.5,
+                 "id":17,
+                 "name":"map-prop",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":27.5,
+                 "x":130.5,
+                 "y":155
+                }, 
+                {
+                 "height":25.5,
+                 "id":18,
+                 "name":"chalk-board",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":23.5,
+                 "x":180.5,
+                 "y":154
+                }, 
+                {
+                 "height":26,
+                 "id":19,
+                 "name":"tree",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":13,
+                 "x":217,
+                 "y":153.5
+                }, 
+                {
+                 "height":19,
+                 "id":20,
+                 "name":"science-board",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":22.5,
+                 "x":261,
+                 "y":161
+                }, 
+                {
+                 "height":16,
+                 "id":21,
+                 "name":"skeloton",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":300,
+                 "y":181
+                }, 
+                {
+                 "height":11,
+                 "id":22,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32.5,
-                 "x":16.5,
-                 "y":152.5
+                 "width":9.5,
+                 "x":307.5,
+                 "y":211
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -237,7 +292,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":11,
+ "nextobjectid":23,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
