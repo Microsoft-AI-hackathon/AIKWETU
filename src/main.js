@@ -15,23 +15,11 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
   },
 });
 
-// k.loadSprite("map", "./map.png");
-
-//Test map
 k.loadSprite("map2", "./map2.png");
 
 k.setBackground(k.Color.fromHex("#311047"));
 
 k.scene("main", async () => {
-//   const mapData = await (await fetch("./map.json")).json();
-//   const layers = mapData.layers;
-
-//   const map = k.add([k.sprite("map"), k.pos(0), k.scale(scaleFactor)]);
-
-
-
-
-  ///////////////////////
 
   const mapData = await (await fetch("./map2.json")).json();
   const layers = mapData.layers;
@@ -58,32 +46,31 @@ k.scene("main", async () => {
   ]);
 
   for (const layer of layers) {
-    // if (layer.name === "boundaries") {
-    //   for (const boundary of layer.objects) {
-    //     map.add([
-    //       k.area({
-    //         shape: new k.Rect(k.vec2(0), boundary.width, boundary.height),
-    //       }),
-    //       k.body({ isStatic: true }),
-    //       k.pos(boundary.x, boundary.y),
-    //       boundary.name,
-    //     ]);
+    if (layer.name === "boundaries") {
+      for (const boundary of layer.objects) {
+        map.add([
+          k.area({
+            shape: new k.Rect(k.vec2(0), boundary.width, boundary.height),
+          }),
+          k.body({ isStatic: true }),
+          k.pos(boundary.x, boundary.y),
+          boundary.name,
+        ]);
 
-    //     if (boundary.name) {
-    //       player.onCollide(boundary.name, () => {
-    //         player.isInDialogue = true;
-    //         displayDialogue(
-    //           dialogueData[boundary.name],
-    //           () => (player.isInDialogue = false)
-    //         );
-    //       });
-    //     }
-    //   }
+        if (boundary.name&&boundary.name!=='outsidewall' ) {
+          player.onCollide(boundary.name, () => {
+            player.isInDialogue = true;
+            displayDialogue(
+              dialogueData[boundary.name],
+              () => (player.isInDialogue = false)
+            );
+          });
+        }
+      }
 
-    //   continue;
-    // }
+      continue;
+    }
 
-    // if (layer.name === "spawnpoints") {
     if (layer.name === "spawn") {
       for (const entity of layer.objects) {
         if (entity.name === "player") {
