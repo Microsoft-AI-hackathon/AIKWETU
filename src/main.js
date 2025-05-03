@@ -55,17 +55,25 @@ k.scene("main", async () => {
           boundary.name,
         ]);
 
+        // Handle the "one" boundary for scene transition
         if (boundary.name === "one") {
           player.onCollide(boundary.name, () => {
-            k.go("lab"); // Redirect to the lab scene
+            if (!player.isInDialogue) {
+              k.go("lab"); // Transition to the lab scene
+            }
           });
-        } else if (boundary.name && boundary.name !== "wall") {
+        } 
+        // Handle other named boundaries for dialogue
+        else if (boundary.name && boundary.name !== "wall") {
           player.onCollide(boundary.name, () => {
-            player.isInDialogue = true;
-            displayDialogue(
-              dialogueData[boundary.name],
-              () => (player.isInDialogue = false)
-            );
+            console.log(`Collided with: ${boundary.name}`);
+            if (!player.isInDialogue) {
+              player.isInDialogue = true;
+              displayDialogue(
+                dialogueData[boundary.name] || "No dialogue available.",
+                () => (player.isInDialogue = false)
+              );
+            }
           });
         }
       }
@@ -248,7 +256,7 @@ k.scene("lab", async () => {
     k.add(player);
 
     for (const layer of layers) {
-      if (layer.name === "r2-boundary") {
+      if (layer.name === "boundaries") {
         for (const boundary of layer.objects) {
           labMap.add([
             k.area({
@@ -258,6 +266,20 @@ k.scene("lab", async () => {
             k.pos(boundary.x, boundary.y),
             boundary.name,
           ]);
+
+          // Handle named boundaries for dialogue
+          if (boundary.name && boundary.name !== "wall") {
+            player.onCollide(boundary.name, () => {
+              console.log(`Collided with: ${boundary.name}`);
+              if (!player.isInDialogue) {
+                player.isInDialogue = true;
+                displayDialogue(
+                  dialogueData[boundary.name] || "No dialogue available.",
+                  () => (player.isInDialogue = false)
+                );
+              }
+            });
+          }
         }
       }
     }
