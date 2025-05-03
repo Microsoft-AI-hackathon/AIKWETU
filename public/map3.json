@@ -101,17 +101,6 @@
          "name":"boundaries",
          "objects":[
                 {
-                 "height":82.6666666666667,
-                 "id":2,
-                 "name":"wall",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":430,
-                 "x":1.33333333333333,
-                 "y":111.333333333333
-                }, 
-                {
                  "height":164,
                  "id":3,
                  "name":"wall",
@@ -179,25 +168,25 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
          "id":9,
-         "name":"spawnpoint3",
+         "name":"spawnpoint",
          "objects":[
                 {
                  "height":0,
-                 "id":15,
+                 "id":11,
                  "name":"player",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":37.3333333333333,
+                 "x":39.3333333333333,
                  "y":266
                 }],
          "opacity":1,
@@ -207,7 +196,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":17,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
