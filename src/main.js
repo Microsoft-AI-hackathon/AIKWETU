@@ -57,7 +57,7 @@ k.scene("main", async () => {
           boundary.name,
         ]);
 
-        if (boundary.name&&boundary.name!=='outsidewall' ) {
+        if (boundary.name&&boundary.name!=='wall' ) {
           player.onCollide(boundary.name, () => {
             player.isInDialogue = true;
             displayDialogue(
@@ -71,7 +71,7 @@ k.scene("main", async () => {
       continue;
     }
 
-    if (layer.name === "spawn") {
+    if (layer.name === "spawnpoint") {
       for (const entity of layer.objects) {
         if (entity.name === "player") {
           player.pos = k.vec2(
