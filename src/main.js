@@ -58,30 +58,55 @@ k.scene("main", async () => {
   ]);
 
   for (const layer of layers) {
-    // if (layer.name === "boundaries") {
-    //   for (const boundary of layer.objects) {
-    //     map.add([
-    //       k.area({
-    //         shape: new k.Rect(k.vec2(0), boundary.width, boundary.height),
-    //       }),
-    //       k.body({ isStatic: true }),
-    //       k.pos(boundary.x, boundary.y),
-    //       boundary.name,
-    //     ]);
+    if (layer.name === "boundary") {
+      for (const boundary of layer.objects) {
+        map.add([
+          k.area({
+            shape: new k.Rect(k.vec2(0), boundary.width, boundary.height),
+          }),
+          k.body({ isStatic: true }),
+          k.pos(boundary.x, boundary.y),
+          boundary.name,
+        ]);
 
-    //     if (boundary.name) {
-    //       player.onCollide(boundary.name, () => {
-    //         player.isInDialogue = true;
-    //         displayDialogue(
-    //           dialogueData[boundary.name],
-    //           () => (player.isInDialogue = false)
-    //         );
-    //       });
-    //     }
-    //   }
+        if (boundary.name) {
+          player.onCollide(boundary.name, () => {
+            player.isInDialogue = true;
+            displayDialogue(
+              dialogueData[boundary.name],
+              () => (player.isInDialogue = false)
+            );
+          });
+        }
+      }
 
-    //   continue;
-    // }
+      continue;
+    }
+
+    if (layer.name === "outside_boundary") {
+      for (const boundary of layer.objects) {
+        map.add([
+          k.area({
+            shape: new k.Rect(k.vec2(0), boundary.width, boundary.height),
+          }),
+          k.body({ isStatic: true }),
+          k.pos(boundary.x, boundary.y),
+          boundary.name,
+        ]);
+
+        if (boundary.name) {
+          player.onCollide(boundary.name, () => {
+            player.isInDialogue = true;
+            displayDialogue(
+              dialogueData[boundary.name],
+              () => (player.isInDialogue = false)
+            );
+          });
+        }
+      }
+
+      continue;
+    }
 
     // if (layer.name === "spawnpoints") {
     if (layer.name === "spawn") {
