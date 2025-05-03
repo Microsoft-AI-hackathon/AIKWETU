@@ -560,7 +560,7 @@ k.scene("bossFight", async () => {
       }),
       k.body(),
       k.anchor("center"),
-      k.pos(k.width() / 2, k.height() / 2), // Default position (center of screen)
+      k.pos(), // Default position will be set later
       k.scale(scaleFactor),
       {
         speed: 250,
@@ -594,9 +594,8 @@ k.scene("bossFight", async () => {
         for (const entity of layer.objects) {
           if (entity.name === "player") {
             console.log("Setting player spawn position:", entity.x, entity.y);
-            // Set the player's position directly using the spawn point coordinates
-            player.pos = k.vec2(entity.x * scaleFactor, entity.y * scaleFactor);
-            console.log("Player position after scaling:", player.pos);
+            player.pos = k.vec2(entity.x, entity.y); // Directly set the player's position
+            console.log("Player position set to:", player.pos);
             continue;
           }
         }
@@ -608,7 +607,14 @@ k.scene("bossFight", async () => {
 
     // Add camera scaling and controls
     setCamScale(k);
-    console.log("Boss fight scene initialization complete");
+
+    k.onResize(() => {
+      setCamScale(k);
+    });
+
+    k.onUpdate(() => {
+      k.camPos(player.worldPos().x, player.worldPos().y - 100);
+    });
 
     // Add movement controls (reuse the same logic as the main scene)
     k.onMouseDown((mouseBtn) => {
