@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>AI KWEtu</title>
     
   </head>
   <body>
@@ -77,14 +77,27 @@
       <div>
         <p class="note">Tap/Click around to move</p>
 
-        <div id="textbox-container" style="display: none">
+        <!-- POPUP DIALOG -->
+        <div id="textbox-container">
+          <div id="textbox">
+            <p id="dialogue" class="ui-text">🌟 Welcome, Young Scientist! 🌟
+              Get ready to step into the labs where exciting Grade 3 Science topics await! 🚀🔬
+              Each lab holds interactive items and fascinating discoveries.</p>
+            <div class="btn-container">
+              <button id="close" class="ui-close-btn">Close</button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <div id="textbox-container" style="display: none">
           <div id="textbox">
             <p id="dialogue" class="ui-text"></p>
             <div class="btn-container">
               <button id="close" class="ui-close-btn">Close</button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <canvas id="game"></canvas>
     </div>
