@@ -72,7 +72,7 @@
                 {
                  "height":28.5,
                  "id":13,
-                 "name":"book-shelf1",
+                 "name":"bookShelf1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -83,7 +83,7 @@
                 {
                  "height":29.5,
                  "id":14,
-                 "name":"book-shelf2",
+                 "name":"bookShelf2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -94,7 +94,7 @@
                 {
                  "height":21.5,
                  "id":16,
-                 "name":"book-shelf3",
+                 "name":"bookShelf3",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -105,7 +105,7 @@
                 {
                  "height":13.5,
                  "id":17,
-                 "name":"map-prop",
+                 "name":"mapProp",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -116,7 +116,7 @@
                 {
                  "height":25.5,
                  "id":18,
-                 "name":"chalk-board",
+                 "name":"chalkBoard",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -138,7 +138,7 @@
                 {
                  "height":19,
                  "id":20,
-                 "name":"science-board",
+                 "name":"scienceBoard",
                  "rotation":0,
                  "type":"",
                  "visible":true,
