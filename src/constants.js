@@ -20,4 +20,5 @@ export const dialogueData = {
   library: `There are a lot of programming books on my shelves. There is even one in French (I also speak French btw).
   I probably only read one of them. Who else compulsively buys technical books without ever finishing them?`,
   exit: `If you want to exit JSLegendDev's portfolio, just close the tab.`,
+  door1: `This is the door to the lab. I don't want to go out right now. I like it here.`,
 };
