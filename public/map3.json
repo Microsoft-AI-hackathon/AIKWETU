@@ -190,15 +190,15 @@
          "objects":[
                 {
                  "height":0,
-                 "id":14,
+                 "id":15,
                  "name":"player",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":54,
-                 "y":268.666666666667
+                 "x":37.3333333333333,
+                 "y":266
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -207,7 +207,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":15,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

@@ -156,6 +156,7 @@ k.scene("main", async () => {
             (map.pos.x + entity.x) * scaleFactor,
             (map.pos.y + entity.y) * scaleFactor
           );
+          console.log("Player position after scaling:", player.pos);
           k.add(player);
           continue;
         }
@@ -387,6 +388,7 @@ k.scene("lab", async () => {
               (labMap.pos.x + entity.x) * scaleFactor,
               (labMap.pos.y + entity.y) * scaleFactor
             );
+            console.log("Player position after scaling:", player.pos);
             continue;
           }
         }
@@ -546,7 +548,7 @@ k.scene("bossFight", async () => {
     // Add the boss fight map
     const bossMap = k.add([
       k.sprite("map3"),
-      k.pos(0),
+      k.pos(0, 0),
       k.scale(scaleFactor),
     ]);
 
@@ -588,14 +590,13 @@ k.scene("bossFight", async () => {
       }
 
       // Set spawn points
-      if (layer.name === "spawnpoint") {
+      if (layer.name === "spawnpoint3") {
         for (const entity of layer.objects) {
           if (entity.name === "player") {
             console.log("Setting player spawn position:", entity.x, entity.y);
-            player.pos = k.vec2(
-              (bossMap.pos.x + entity.x) * scaleFactor,
-              (bossMap.pos.y + entity.y) * scaleFactor
-            );
+            // Set the player's position directly using the spawn point coordinates
+            player.pos = k.vec2(entity.x * scaleFactor, entity.y * scaleFactor);
+            console.log("Player position after scaling:", player.pos);
             continue;
           }
         }
