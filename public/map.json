@@ -377,6 +377,17 @@
                  "width":33.3333333333334,
                  "x":286.666666666667,
                  "y":320
+                }, 
+                {
+                 "height":12,
+                 "id":52,
+                 "name":"gotoboss",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":29.3333333333333,
+                 "x":49,
+                 "y":306.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -430,7 +441,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":52,
+ "nextobjectid":53,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
