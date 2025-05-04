@@ -4,23 +4,106 @@ export const dialogueData = {
   chicken: `Cluck cluck! 🐣 I'm alive because I eat, grow, and have baby chicks!`,
   water: `Splish splash! 🌊 Water helps living things survive, but water itself isn’t alive.`,
   exit: `Click close to go back.`,
-  
+  boss:`🧪 Boss Challenge Quiz: Living and Non-Living Things
+
+🔥 You have encountered the Boss!
+🎯 Time to prove what you’ve learned about Life Science!
+
+💥 Defeat the boss by answering all 10 correctly! Good luck, scientist!
+
+1. Which of these characters is a living thing?
+
+A) 🐰 Rabbit
+B) 🗺️ Map Prop
+C) 📖 Book Shelf
+
+
+2. What makes the 🌳 Tree a living thing?
+
+A) It stands still all day
+B) It holds bird nests
+C) It grows and makes oxygen
+D) It's green
+
+
+3. Why is the ☠️ Skeleton considered non-living?
+
+A) It's scary
+B) It no longer eats, grows, or breathes
+C) It moves at night
+D) It used to be part of a living thing
+
+
+4. Which of these objects is NOT alive and NEVER was?
+
+A) 🖍️ Chalk Board
+B) 🐸 Frog
+C) 👩‍🏫 Teacher
+D) 📚 Student
+
+
+5. Which of these is an example of a living organism?
+
+A) 🐝 Bee
+B) 🪑 Chair
+C) 🧊 Ice
+D) 📱 Smartphone
+
+
+6. How do plants and animals differ in terms of energy production?
+
+A) Animals make their own food, plants don’t
+B) Plants make their own food, animals don’t
+C) Both make their own food
+D) Neither make their own food
+
+
+7. Which item below can store knowledge, but is not alive?
+
+A) 📚 Book Shelf
+B) 👩‍🏫 Teacher
+C) 📚 Student
+D) 🐸 Frog
+
+
+8. Which of these is a characteristic of living organisms?
+
+A) Ability to move without external help
+B) Ability to reproduce
+C) Ability to be made of plastic
+D) Ability to always stay in one place
+
+9. Which of these objects shows the difference between living and non-living things?
+
+A) 🌻 Flower
+B) 🚗 Car
+C) 🦋 Butterfly
+D) 🏠 House
+
+
+10. Which of the following is true for all living things?
+
+A) They can think and make decisions
+B) They need energy to survive
+C) They only live for one year
+D) They can’t reproduce`,
   // Living Things  
-  rabbit: `Hop hop! 🐰 I am a living thing because I breathe, move, and grow!`,
-  frog: `Ribbit! 🐸 I start as a tiny tadpole and grow into a frog—that’s called changing and growing!`,
-  tree: `I stand tall and strong! 🌳 I grow from a small seed, drink water, and make oxygen. That makes me alive!`,
-  teacher: `I teach students and help them learn! Learning and growing makes people living things! 👩‍🏫`,
-  student1: `I can run, eat, and grow taller—that means I am a living thing!`,
-  student2: `I laugh, talk, and play! Living things can move and respond to the world! 🎉`,
-  
-  // Non-Living Things  
-  book_shelf1: `I hold books 📚, but I don’t eat or grow—so I am NOT alive!`,
-  book_shelf2: `Books can teach you about life, but they don’t breathe or change by themselves.`,
-  book_shelf3: `Even if I store important information, I don’t grow or move—so I am not a living thing!`,
-  chalk_board: `You can write on me, but I don’t eat, grow, or move. That means I’m non-living! 🖍️`,
-  science_board: `I help show cool science facts, but I don’t change or need food—so I am not alive.`,
-  desk: `You can sit at me, but I don’t breathe or grow—so I am non-living!`,
-  skeleton: `I may look like something alive, but I don’t eat or grow anymore! ☠️`,
-  shelves: `I store things, but I don’t need food or air like living things do!`,
-};
+  "rabbit": "🐰 Rabbit - Hop hop! I'm alive because I breathe, eat, and grow!",
+    "frog": "🐸 Frog - Ribbit! I change from a tadpole to a frog—that's how I grow!",
+    "tree": "🌳 Tree - I grow from a tiny seed and make oxygen for all living things!",
+    "teacher": "👩‍🏫 Teacher - I help students learn and grow their knowledge!",
+    "student1": "📚 Student 1 - I love exploring science! Learning helps me grow!",
+    "student2": "🎉 Friend - I eat, move, and feel emotions—that means I'm alive!",
+
+  // Non-Living Things 🏠📖🎯  
+  "bookShelf1": "📚 Book Shelf - I hold books full of knowledge, but I don’t grow or move—so I’m non-living.",
+    "bookShelf2": "📖 Book Shelf - Books can teach you about life, but they don’t breathe or change on their own.",
+    "bookShelf3": "📖 Book Shelf - Even if I store important facts, I don’t eat or drink—so I am not alive.",
+    "mapProp": "🗺️ Map Prop - I show locations, but I don’t grow, breathe, or need food.",
+    "chalkBoard": "🖍️ Chalk Board - Teachers write on me with chalk, but I don’t move on my own!",
+    "scienceBoard": "🔬 Science Board - I display cool science facts, but I don’t grow or react—so I’m not alive.",
+    "skeloton": "☠️ Skeleton - I may look like something alive, but I don’t eat or grow anymore!",
+    "shelfs": "🗄️ Shelves - I store things, but I don’t need food or air like living things do.",
+    "desk": "💺 Desk - I help students work, but I don’t eat, drink, or grow—so I’m not living."
+  }
 

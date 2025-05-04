@@ -70,64 +70,9 @@
          "name":"boundaries",
          "objects":[
                 {
-                 "height":23.5,
-                 "id":5,
-                 "name":"wall",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":365.5,
-                 "x":1,
-                 "y":128
-                }, 
-                {
-                 "height":42.5,
-                 "id":6,
-                 "name":"wall",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":14.5,
-                 "x":0.5,
-                 "y":130
-                }, 
-                {
-                 "height":218.5,
-                 "id":7,
-                 "name":"wall",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":33.5,
-                 "x":-34,
-                 "y":129
-                }, 
-                {
-                 "height":28.5,
-                 "id":8,
-                 "name":"wall",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":366,
-                 "x":1,
-                 "y":319.5
-                }, 
-                {
-                 "height":165,
-                 "id":9,
-                 "name":"wall",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":48,
-                 "x":319.5,
-                 "y":153
-                }, 
-                {
                  "height":28.5,
                  "id":13,
-                 "name":"book-shelf1",
+                 "name":"bookShelf1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -138,7 +83,7 @@
                 {
                  "height":29.5,
                  "id":14,
-                 "name":"book-shelf2",
+                 "name":"bookShelf2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -149,7 +94,7 @@
                 {
                  "height":21.5,
                  "id":16,
-                 "name":"book-shelf3",
+                 "name":"bookShelf3",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -160,7 +105,7 @@
                 {
                  "height":13.5,
                  "id":17,
-                 "name":"map-prop",
+                 "name":"mapProp",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -171,7 +116,7 @@
                 {
                  "height":25.5,
                  "id":18,
-                 "name":"chalk-board",
+                 "name":"chalkBoard",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -193,7 +138,7 @@
                 {
                  "height":19,
                  "id":20,
-                 "name":"science-board",
+                 "name":"scienceBoard",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -255,17 +200,6 @@
                  "width":14.5,
                  "x":0.5,
                  "y":192.5
-                }, 
-                {
-                 "height":15,
-                 "id":26,
-                 "name":"exit",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":28,
-                 "x":50.5,
-                 "y":304.5
                 }, 
                 {
                  "height":11.5,
@@ -368,7 +302,29 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":11,
+         "name":"exit",
+         "objects":[
+                {
+                 "height":11,
+                 "id":41,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":27,
+                 "x":51,
+                 "y":308
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -391,12 +347,12 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
- "nextlayerid":11,
- "nextobjectid":40,
+ "nextlayerid":12,
+ "nextobjectid":44,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

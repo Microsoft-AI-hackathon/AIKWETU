@@ -25,9 +25,33 @@
         height: 100%;
         position: relative;
       }
+      .btn-press{
+        background-color: pink;
+      }
+      #textbox-container {
+      /* display: none; */
+      /* Hide the dialogue box initially */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* background-color: rgba(252, 252, 252, 0.9); */
+      padding: 20px;
+      /* border-radius: 8px; */
+      color: black;
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      max-height: 70vh; 
+      /* Limit height to 70% of the viewport */
+      overflow-y: scroll;
+      /* Enable vertical scrolling if content overflows */
+      /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
+      /* Optional: add shadow for style */
+    }
 
       #textbox {
-        position: absolute;
+        /* position: absolute; */
         left: 10%;
         right: 10%;
         bottom: 2vh;
@@ -88,9 +112,19 @@
             </div>
           </div>
         </div>
+
+        <!-- QUIZ DIALOG -->
+        <div id="quiz-container" style="display: none;">
+          <div id="quiz-box">
+            <p id="quiz-question" class="ui-text"></p>
+            <div id="quiz-options" class="btn-container"></div>
+            <button id="quiz-close" class="ui-close-btn">Close</button>
+          </div>
+        </div>
       </div>
       <canvas id="game"></canvas>
     </div>
     <script type="module" src="src/main.js"></script>
+    <script type="module" src="./quiz.js"></script>
   </body>
 </html>

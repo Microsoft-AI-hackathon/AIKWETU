@@ -16,8 +16,9 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
 });
 
 k.loadSprite("map2", "./map2.png");
-k.loadSprite("map", "./map.png"); // Load the lab map sprite
-
+k.loadSprite("map", "./map.png"); 
+k.loadSprite("map3", "./map3.png");
+// 
 k.setBackground(k.Color.fromHex("#311047"));
 
 k.scene("main", async () => {
@@ -55,7 +56,7 @@ k.scene("main", async () => {
           boundary.name,
         ]);
 
-        // Handle the "one" boundary for scene transition
+        // Handle the "one" boundary for scene transition to lab house
         if (boundary.name === "one") {
           player.onCollide(boundary.name, () => {
             if (!player.isInDialogue) {
@@ -63,6 +64,7 @@ k.scene("main", async () => {
             }
           });
         } 
+
         // Handle other named boundaries for dialogue
         else if (boundary.name && boundary.name !== "wall") {
           player.onCollide(boundary.name, () => {
@@ -267,6 +269,14 @@ k.scene("lab", async () => {
             boundary.name,
           ]);
 
+          if (boundary.name === "skeloton") {
+            player.onCollide(boundary.name, () => {
+              if (!player.isInDialogue) {
+                k.go("challenge"); // Transition to the challenge scene
+              }
+            });
+          } 
+
           // Handle named boundaries for dialogue
           if (boundary.name && boundary.name !== "wall") {
             player.onCollide(boundary.name, () => {
@@ -324,4 +334,172 @@ k.scene("lab", async () => {
   }
 });
 
+// Challenge scene definition
+k.scene("challenge", async () => {
+  console.log("Starting challenge scene initialization");
+
+  try {
+    // Fetch and load map3.json
+    const response = await fetch("./map3.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const mapData = await response.json();
+    const layers = mapData.layers;
+
+    // Add the map sprite
+    const challengeMap = k.add([
+      k.sprite("map3"), // Ensure "map3" matches the loaded sprite
+      k.pos(0),
+      k.scale(scaleFactor),
+    ]);
+
+    // Create the player
+    const player = k.make([
+      k.sprite("spritesheet", { anim: "idle-down" }),
+      k.area({
+        shape: new k.Rect(k.vec2(0, 3), 10, 10),
+      }),
+      k.body(),
+      k.anchor("center"),
+      k.pos(k.width() / 2, k.height() / 2),
+      k.scale(scaleFactor),
+      {
+        speed: 250,
+        direction: "down",
+        isInDialogue: false,
+      },
+      "player",
+    ]);
+
+    k.add(player);
+
+    // Process layers and boundaries
+    for (const layer of layers) {
+      if (layer.name === "boundaries") {
+        for (const boundary of layer.objects) {
+          challengeMap.add([
+            k.area({
+              shape: new k.Rect(k.vec2(0), boundary.width, boundary.height),
+            }),
+            k.body({ isStatic: true }),
+            k.pos(boundary.x, boundary.y),
+            boundary.name,
+          ]);
+
+          // Handle the "boss" boundary for dialogue
+          if (boundary.name === "boss") {
+            player.onCollide(boundary.name, () => {
+              if (!player.isInDialogue) {
+                player.isInDialogue = true;
+
+                // Display the dialogue for "boss"
+                const dialogueBox = document.getElementById("textbox");
+                const dialogueText = document.getElementById("dialogue");
+                dialogueText.innerText =
+                  dialogueData["boss"] || "You have encountered the boss!";
+
+                // Add a "Close" button dynamically
+                const btnContainer = document.querySelector(".btn-container");
+                btnContainer.innerHTML = ""; // Clear previous buttons
+
+                const closeButton = document.createElement("button");
+                closeButton.innerText = "Close";
+                closeButton.className = "ui-close-btn";
+                closeButton.addEventListener("click", () => {
+                  dialogueBox.style.display = "none"; // Hide the dialogue box
+                  player.isInDialogue = false;
+                });
+                btnContainer.appendChild(closeButton);
+
+                // Show the dialogue box
+                document.getElementById("textbox-container").style.display =
+                  "block";
+              }
+            });
+          }
+        }
+      }
+    }
+
+    // Set camera scaling
+    setCamScale(k);
+
+    k.onResize(() => {
+      setCamScale(k);
+    });
+
+    // Update camera position
+    k.onUpdate(() => {
+      k.camPos(player.worldPos().x, player.worldPos().y - 100);
+    });
+
+    // Handle mouse clicks for movement
+    k.onMouseDown((mouseBtn) => {
+      if (mouseBtn !== "left" || player.isInDialogue) return;
+
+      const worldMousePos = k.toWorld(k.mousePos());
+      player.moveTo(worldMousePos, player.speed);
+    });
+
+    // Stop animations when movement stops
+    function stopAnims() {
+      if (player.direction === "down") {
+        player.play("idle-down");
+        return;
+      }
+      if (player.direction === "up") {
+        player.play("idle-up");
+        return;
+      }
+
+      player.play("idle-side");
+    }
+
+    k.onMouseRelease(stopAnims);
+
+    k.onKeyRelease(() => {
+      stopAnims();
+    });
+  } catch (error) {
+    console.error("Error initializing challenge scene:", error);
+  }
+});
+
 k.go("main");
+
+player.onCollide("exit", () => {
+  if (!player.isInDialogue) {
+    player.isInDialogue = true;
+
+    // Display the dialogue for "exit"
+    const dialogueBox = document.getElementById("textbox");
+    const dialogueText = document.getElementById("dialogue");
+    dialogueText.innerText = dialogueData["exit"] || "No dialogue available.";
+
+    // Add a "Back" button dynamically
+    const btnContainer = document.querySelector(".btn-container");
+    const backButton = document.createElement("button");
+    backButton.innerText = "Back";
+    backButton.className = "ui-close-btn";
+    backButton.addEventListener("click", () => {
+      window.location.href = "anotherPage.html"; // Replace with the actual URL
+    });
+
+    // Clear existing buttons and add "Close" and "Back"
+    btnContainer.innerHTML = ""; // Clear previous buttons
+    btnContainer.appendChild(backButton);
+
+    const closeButton = document.createElement("button");
+    closeButton.innerText = "Close";
+    closeButton.className = "ui-close-btn";
+    closeButton.addEventListener("click", () => {
+      dialogueBox.style.display = "none"; // Hide the dialogue box
+      player.isInDialogue = false;
+    });
+    btnContainer.appendChild(closeButton);
+
+    // Show the dialogue box
+    document.getElementById("textbox-container").style.display = "block";
+  }
+});
