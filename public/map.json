@@ -299,10 +299,99 @@
                  "width":13.5,
                  "x":289.5,
                  "y":218
+                }, 
+                {
+                 "height":7,
+                 "id":44,
+                 "name":"mushroom",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":3.33333333333334,
+                 "x":38.3333333333333,
+                 "y":213
+                }, 
+                {
+                 "height":9.33333333333331,
+                 "id":45,
+                 "name":"rock",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":6.66666666666667,
+                 "x":21.6666666666667,
+                 "y":290.333333333333
+                }, 
+                {
+                 "height":8.66666666666669,
+                 "id":46,
+                 "name":"carrot",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10.6666666666667,
+                 "x":131.333333333333,
+                 "y":308.666666666667
+                }, 
+                {
+                 "height":46.3333333333334,
+                 "id":47,
+                 "name":"wall",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8.33333333333333,
+                 "x":-9.66666666666667,
+                 "y":287.666666666667
+                }, 
+                {
+                 "height":15.3333333333333,
+                 "id":48,
+                 "name":"wall",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":286.666666666667,
+                 "x":-0.666666666666667,
+                 "y":320.333333333333
+                }, 
+                {
+                 "height":208,
+                 "id":49,
+                 "name":"wall",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":33.6666666666667,
+                 "x":320.333333333333,
+                 "y":129
+                },
+            
+                {
+                 "height":17.6666666666666,
+                 "id":50,
+                 "name":"wall",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":33.3333333333334,
+                 "x":286.666666666667,
+                 "y":320
+                }, 
+                {
+                 "height":12,
+                 "id":52,
+                 "name":"gotoboss",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":29.3333333333333,
+                 "x":49,
+                 "y":306.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -352,7 +441,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":44,
+ "nextobjectid":53,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

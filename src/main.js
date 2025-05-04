@@ -269,7 +269,7 @@ k.scene("lab", async () => {
             boundary.name,
           ]);
 
-          if (boundary.name === "skeloton") {
+          if (boundary.name === "gotoboss") {
             player.onCollide(boundary.name, () => {
               if (!player.isInDialogue) {
                 k.go("challenge"); // Transition to the challenge scene

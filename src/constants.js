@@ -4,6 +4,7 @@ export const dialogueData = {
   chicken: `Cluck cluck! 🐣 I'm alive because I eat, grow, and have baby chicks!`,
   water: `Splish splash! 🌊 Water helps living things survive, but water itself isn’t alive.`,
   exit: `Click close to go back.`,
+  gotoboss:`Time to fact the boss!`,
   boss:`🧪 Boss Challenge Quiz: Living and Non-Living Things
 
 🔥 You have encountered the Boss!
@@ -94,16 +95,19 @@ D) They can’t reproduce`,
     "teacher": "👩‍🏫 Teacher - I help students learn and grow their knowledge!",
     "student1": "📚 Student 1 - I love exploring science! Learning helps me grow!",
     "student2": "🎉 Friend - I eat, move, and feel emotions—that means I'm alive!",
-
+    "carrot": "🥕 Carrot - I grow underground and need water and sunlight to survive—that's what makes me alive!",
+    "mushroom": "🍄 Mushroom - I might look like a plant, but I don’t have leaves! I grow and spread spores, which makes me alive!",
+ 
   // Non-Living Things 🏠📖🎯  
-  "bookShelf1": "📚 Book Shelf - I hold books full of knowledge, but I don’t grow or move—so I’m non-living.",
-    "bookShelf2": "📖 Book Shelf - Books can teach you about life, but they don’t breathe or change on their own.",
-    "bookShelf3": "📖 Book Shelf - Even if I store important facts, I don’t eat or drink—so I am not alive.",
+  "bookShelf1": "📚 Book Shelf 1 - I hold books full of knowledge, but I don’t grow or move—so I’m non-living.",
+    "bookShelf2": "📖 Book Shelf 2 - Books can teach you about life, but they don’t breathe or change on their own.",
+    "bookShelf3": "📖 Book Shelf 3 - Even if I store important facts, I don’t eat or drink—so I am not alive.",
     "mapProp": "🗺️ Map Prop - I show locations, but I don’t grow, breathe, or need food.",
     "chalkBoard": "🖍️ Chalk Board - Teachers write on me with chalk, but I don’t move on my own!",
     "scienceBoard": "🔬 Science Board - I display cool science facts, but I don’t grow or react—so I’m not alive.",
     "skeloton": "☠️ Skeleton - I may look like something alive, but I don’t eat or grow anymore!",
     "shelfs": "🗄️ Shelves - I store things, but I don’t need food or air like living things do.",
-    "desk": "💺 Desk - I help students work, but I don’t eat, drink, or grow—so I’m not living."
+    "desk": "💺 Desk - I help students work, but I don’t eat, drink, or grow—so I’m not living.",
+    "rock": "🪨 Rock - I sit still and don’t grow or change on my own. That makes me a non-living thing!"
   }
 
