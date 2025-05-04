@@ -34,9 +34,6 @@ k.scene("main", async () => {
 
 //   const map = k.add([k.sprite("map"), k.pos(0), k.scale(scaleFactor)]);
 
-
-
-
   ///////////////////////
 
   const mapData = await (await fetch("./map2.json")).json();
@@ -615,7 +612,40 @@ k.scene("bossFight", async () => {
             displayDialogue(
               "BOSS: Ahh you have made it, I hope you come prepared!", // Boss dialogue
               () => {
-                console.log("Boss dialogue complete. Starting player's response."); // Debug statement
+                console.log("Boss dialogue complete. Creating score display."); // Debug statement
+
+                // Create boss score display
+                const bossScore = k.add([
+                  k.text("Boss Score: 100", { size: 24 }), // Initial score is 100
+                  k.pos(k.width() - 150, 10), // Position at the top-right corner
+                  { value: 100 }, // Boss score value
+                ]);
+
+                console.log("Boss score display created:", bossScore); // Debug statement
+
+                // Debug: Log the position and visibility of the score
+                console.log("Boss score position:", bossScore.pos);
+                console.log("Boss score visibility:", !bossScore.hidden);
+
+                // Ensure the score is drawn
+                k.onDraw(() => {
+                  console.log("Drawing boss score...");
+                });
+
+                // Function to update boss score
+                function updateBossScore(amount) {
+                  console.log("Updating boss score. Current value:", bossScore.value); // Debug statement
+                  bossScore.value = Math.max(0, bossScore.value - amount); // Deduct score but don't go below 0
+                  bossScore.text = `Boss Score: ${bossScore.value}`; // Update the displayed score
+                  console.log("Boss score updated. New value:", bossScore.value); // Debug statement
+
+                  if (bossScore.value <= 0) {
+                    console.log("Boss defeated!"); // Debug statement
+                    displayDialogue("You defeated the boss!", () => {
+                      k.go("winScene"); // Transition to a win scene
+                    });
+                  }
+                }
 
                 // Player's response after the boss's dialogue
                 displayDialogue(
@@ -624,7 +654,7 @@ k.scene("bossFight", async () => {
                     console.log("Player's response complete. Starting the quiz."); // Debug statement
 
                     // Start the quiz after the player's response
-                    startQuiz(player, boss, () => {
+                    startQuiz(player, updateBossScore, () => {
                       console.log("Quiz complete."); // Debug statement
                       player.isInDialogue = false;
                     });
@@ -722,7 +752,7 @@ k.scene("bossFight", async () => {
 });
 
 // Quiz logic
-function startQuiz(player, boss, onComplete) {
+function startQuiz(player, updateBossScore, onComplete) {
   const questions = [
     {
       question: "What is 2 + 2?",
@@ -748,13 +778,8 @@ function startQuiz(player, boss, onComplete) {
     (playerAnswer) => {
       if (playerAnswer === randomQuestion.answer) {
         console.log("Correct answer! Dealing damage to the boss.");
-        boss.health -= 20;
-        if (boss.health <= 0) {
-          console.log("Boss defeated!");
-          displayDialogue("You defeated the boss!", onComplete);
-        } else {
-          displayDialogue(`Correct! Boss health: ${boss.health}`, onComplete);
-        }
+        updateBossScore(20);
+        onComplete();
       } else {
         console.log("Wrong answer! Boss deals damage to the player.");
         player.health -= 20;
