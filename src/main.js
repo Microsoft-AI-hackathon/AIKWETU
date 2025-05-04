@@ -29,19 +29,10 @@ k.loadSprite("map3", "./map3.png");
 k.setBackground(k.Color.fromHex("#311047"));
 
 k.scene("main", async () => {
-//   const mapData = await (await fetch("./map.json")).json();
-//   const layers = mapData.layers;
-
-//   const map = k.add([k.sprite("map"), k.pos(0), k.scale(scaleFactor)]);
-
-  ///////////////////////
-
   const mapData = await (await fetch("./map2.json")).json();
   const layers = mapData.layers;
 
   const map = k.add([k.sprite("map2"), k.pos(0), k.scale(scaleFactor)]);
-
-  ///////////////////////////////////////////////////////////////////////////////////
 
   const player = k.make([
     k.sprite("spritesheet", { anim: "idle-down" }),
@@ -122,7 +113,7 @@ k.scene("main", async () => {
           }),
           k.body({ isStatic: true }),
           k.pos(boundary.x, boundary.y),
-          "door1"
+          "door1",
         ]);
 
         player.onCollide("door1", () => {
@@ -145,7 +136,6 @@ k.scene("main", async () => {
       continue;
     }
 
-    // if (layer.name === "spawnpoints") {
     if (layer.name === "spawn") {
       for (const entity of layer.objects) {
         if (entity.name === "player") {
@@ -341,11 +331,44 @@ k.scene("lab", async () => {
             boundary.name, // Use the name for collision detection if needed
           ]);
         }
+
+        // Handle "gotoboss" entity in the "boundaries" layer
+        for (const entity of layer.objects) {
+          if (entity.name === "gotoboss") {
+            console.log("Adding gotoboss entity to the map:", entity); // Debug statement
+
+            labMap.add([
+              k.area({
+                shape: new k.Rect(k.vec2(0), entity.width, entity.height),
+              }),
+              k.body({ isStatic: true }),
+              k.pos(entity.x, entity.y),
+              "gotoboss", // Entity name
+            ]);
+
+            player.onCollide("gotoboss", () => {
+              console.log("Player collided with gotoboss"); // Debug statement
+              if (player.isInDialogue) {
+                console.log("Player is already in dialogue"); // Debug statement
+                return;
+              }
+              player.isInDialogue = true;
+              displayDialogue(
+                "You are now entering the boss fight...",
+                () => {
+                  console.log("Dialogue complete, transitioning to boss fight"); // Debug statement
+                  player.isInDialogue = false;
+                  k.go("bossFight"); // Transition to the boss fight scene
+                }
+              );
+            });
+          }
+        }
         continue;
       }
 
       // Handle exit
-      if (layer.name === "exit") {
+      if (layer.name === "boudaries") {
         for (const exit of layer.objects) {
           labMap.add([
             k.area({
@@ -353,11 +376,11 @@ k.scene("lab", async () => {
             }),
             k.body({ isStatic: true }),
             k.pos(exit.x, exit.y),
-            "exit",
+            "gotoboss", // Entity name
           ]);
 
-          player.onCollide("exit", () => {
-            console.log("Player collided with exit"); // Debug statement
+          player.onCollide("gotoboss", () => {
+            console.log("Player collided with gotoboss"); // Debug statement
             if (player.isInDialogue) {
               console.log("Player is already in dialogue"); // Debug statement
               return;
@@ -368,7 +391,7 @@ k.scene("lab", async () => {
               () => {
                 console.log("Dialogue complete, transitioning to boss fight"); // Debug statement
                 player.isInDialogue = false;
-                k.go("bossFight");
+                k.go("bossFight"); // Transition to the boss fight scene
               }
             );
           });
@@ -557,21 +580,15 @@ k.scene("bossFight", async () => {
       }),
       k.body(),
       k.anchor("center"),
-      k.pos(100, 200), // Manually set spawn position
+      k.pos(), // Default position will be set later
       k.scale(scaleFactor),
       {
         speed: 250,
         direction: "down",
         isInDialogue: false,
-        health: 100, // Player health
       },
       "player",
     ]);
-
-    // Create boss
-    const boss = {
-      health: 100, // Boss health
-    };
 
     // Process map layers
     for (const layer of layers) {
@@ -592,7 +609,7 @@ k.scene("bossFight", async () => {
         continue;
       }
 
-      // Handle fight object
+      // Handle "fight" object collision
       if (layer.name === "fight") {
         for (const fight of layer.objects) {
           bossMap.add([
@@ -601,65 +618,23 @@ k.scene("bossFight", async () => {
             }),
             k.body({ isStatic: true }),
             k.pos(fight.x, fight.y),
-            "fight",
+            "fight", // Entity name
           ]);
 
           player.onCollide("fight", () => {
-            if (player.isInDialogue) return;
+            console.log("Player collided with 'fight'"); // Debug statement
+            if (player.isInDialogue) {
+              console.log("Player is already in dialogue"); // Debug statement
+              return;
+            }
             player.isInDialogue = true;
 
-            // Boss dialogue before starting the quiz
+            // Display boss dialogue
             displayDialogue(
-              "BOSS: Ahh you have made it, I hope you come prepared!", // Boss dialogue
+              "Boss: I hope you have come prepared!!",
               () => {
-                console.log("Boss dialogue complete. Creating score display."); // Debug statement
-
-                // Create boss score display
-                const bossScore = k.add([
-                  k.text("Boss Score: 100", { size: 24 }), // Initial score is 100
-                  k.pos(k.width() - 150, 10), // Position at the top-right corner
-                  { value: 100 }, // Boss score value
-                ]);
-
-                console.log("Boss score display created:", bossScore); // Debug statement
-
-                // Debug: Log the position and visibility of the score
-                console.log("Boss score position:", bossScore.pos);
-                console.log("Boss score visibility:", !bossScore.hidden);
-
-                // Ensure the score is drawn
-                k.onDraw(() => {
-                  console.log("Drawing boss score...");
-                });
-
-                // Function to update boss score
-                function updateBossScore(amount) {
-                  console.log("Updating boss score. Current value:", bossScore.value); // Debug statement
-                  bossScore.value = Math.max(0, bossScore.value - amount); // Deduct score but don't go below 0
-                  bossScore.text = `Boss Score: ${bossScore.value}`; // Update the displayed score
-                  console.log("Boss score updated. New value:", bossScore.value); // Debug statement
-
-                  if (bossScore.value <= 0) {
-                    console.log("Boss defeated!"); // Debug statement
-                    displayDialogue("You defeated the boss!", () => {
-                      k.go("winScene"); // Transition to a win scene
-                    });
-                  }
-                }
-
-                // Player's response after the boss's dialogue
-                displayDialogue(
-                  "PLAYER: Bring it on!!!", // Player's dialogue
-                  () => {
-                    console.log("Player's response complete. Starting the quiz."); // Debug statement
-
-                    // Start the quiz after the player's response
-                    startQuiz(player, updateBossScore, () => {
-                      console.log("Quiz complete."); // Debug statement
-                      player.isInDialogue = false;
-                    });
-                  }
-                );
+                console.log("Boss dialogue complete. Starting quiz."); // Debug statement
+                // Start the quiz or any other logic here
               }
             );
           });
@@ -746,52 +721,57 @@ k.scene("bossFight", async () => {
     k.onKeyRelease(() => {
       stopAnims();
     });
+
+    k.onKeyDown((key) => {
+      const keyMap = [
+        k.isKeyDown("right"),
+        k.isKeyDown("left"),
+        k.isKeyDown("up"),
+        k.isKeyDown("down"),
+      ];
+
+      let nbOfKeyPressed = 0;
+      for (const key of keyMap) {
+        if (key) {
+          nbOfKeyPressed++;
+        }
+      }
+
+      if (nbOfKeyPressed > 1) return;
+
+      if (player.isInDialogue) return;
+      if (keyMap[0]) {
+        player.flipX = false;
+        if (player.curAnim() !== "walk-side") player.play("walk-side");
+        player.direction = "right";
+        player.move(player.speed, 0);
+        return;
+      }
+
+      if (keyMap[1]) {
+        player.flipX = true;
+        if (player.curAnim() !== "walk-side") player.play("walk-side");
+        player.direction = "left";
+        player.move(-player.speed, 0);
+        return;
+      }
+
+      if (keyMap[2]) {
+        if (player.curAnim() !== "walk-up") player.play("walk-up");
+        player.direction = "up";
+        player.move(0, -player.speed);
+        return;
+      }
+
+      if (keyMap[3]) {
+        if (player.curAnim() !== "walk-down") player.play("walk-down");
+        player.direction = "down";
+        player.move(0, player.speed);
+      }
+    });
   } catch (error) {
     console.error("Error initializing boss fight scene:", error);
   }
 });
-
-// Quiz logic
-function startQuiz(player, updateBossScore, onComplete) {
-  const questions = [
-    {
-      question: "What is 2 + 2?",
-      options: ["3", "4", "5"],
-      answer: "4",
-    },
-    {
-      question: "What is the capital of France?",
-      options: ["Berlin", "Madrid", "Paris"],
-      answer: "Paris",
-    },
-    {
-      question: "What is 5 * 6?",
-      options: ["30", "25", "35"],
-      answer: "30",
-    },
-  ];
-
-  const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-
-  displayDialogue(
-    `${randomQuestion.question}\nOptions: ${randomQuestion.options.join(", ")}`,
-    (playerAnswer) => {
-      if (playerAnswer === randomQuestion.answer) {
-        console.log("Correct answer! Dealing damage to the boss.");
-        updateBossScore(20);
-        onComplete();
-      } else {
-        console.log("Wrong answer! Boss deals damage to the player.");
-        player.health -= 20;
-        if (player.health <= 0) {
-          console.log("Player defeated!");
-          displayDialogue("You were defeated by the boss!", onComplete);
-        } else {
-          displayDialogue(`Wrong! Your health: ${player.health}`, onComplete);
-        }
-      }
-    }
-  );
-}
 
 k.go("main");

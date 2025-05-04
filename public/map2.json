@@ -292,6 +292,58 @@
         {
          "firstgid":128,
          "source":"..\/..\/..\/hackPrep\/public\/OutdoorsTileset.tsx"
+        }, 
+        {
+         "columns":9,
+         "firstgid":182,
+         "image":"..\/..\/..\/sprites\/Sprout Lands - Sprites - Basic pack\/Sprout Lands - Sprites - Basic pack\/Objects\/Basic_Furniture.png",
+         "imageheight":96,
+         "imagewidth":144,
+         "margin":0,
+         "name":"Basic_Furniture",
+         "spacing":0,
+         "tilecount":54,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":7,
+         "firstgid":236,
+         "image":"..\/..\/..\/sprites\/Sprout Lands - Sprites - Basic pack\/Sprout Lands - Sprites - Basic pack\/Tilesets\/Wooden_House_Roof_Tilset.png",
+         "imageheight":80,
+         "imagewidth":112,
+         "margin":0,
+         "name":"Wooden_House_Roof_Tilset",
+         "spacing":0,
+         "tilecount":35,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":64,
+         "firstgid":271,
+         "image":"..\/..\/..\/..\/Downloads\/ChatGPT Image May 3, 2025, 06_39_59 PM.png",
+         "imageheight":1536,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"ChatGPT Image May 3, 2025, 06_39_59 PM",
+         "spacing":0,
+         "tilecount":6144,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":64,
+         "firstgid":6415,
+         "image":"..\/..\/..\/..\/Downloads\/sprite sheet with 16x16 pixel sprites of school objects, classroom buildings, biology class items, and more.png",
+         "imageheight":1024,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"sprite sheet with 16x16 pixel sprites of school objects, classroom buildings, biology class items, and more",
+         "spacing":0,
+         "tilecount":4096,
+         "tileheight":16,
+         "tilewidth":16
         }],
  "tilewidth":16,
  "type":"map",

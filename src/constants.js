@@ -22,3 +22,34 @@ export const dialogueData = {
   exit: `If you want to exit JSLegendDev's portfolio, just close the tab.`,
   door1: `This is the door to the lab. I don't want to go out right now. I like it here.`,
 };
+
+export const quizData = {
+  questions: [
+    {
+      question: "What is the powerhouse of the cell?",
+      options: ["Nucleus", "Mitochondria", "Ribosome"],
+      answer: "Mitochondria"
+    },
+    {
+      question: "What is the basic unit of life?",
+      options: ["Cell", "Tissue", "Organ"],
+      answer: "Cell"
+    }
+  ],
+  scoring: {
+    playerStartHP: 100,
+    bossStartHP: 100,
+    playerDamage: 25,  // Damage taken when wrong
+    bossDamage: 20    // Damage taken when correct
+  }
+};
+
+export const scoreDisplay = {
+  width: 200,
+  height: 50,
+  xPos: 20,
+  yPos: 20,
+  textSize: 24,
+  bgColor: [0, 0, 0],
+  textColor: [255, 255, 255]
+};
